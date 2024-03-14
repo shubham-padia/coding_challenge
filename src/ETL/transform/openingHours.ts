@@ -46,12 +46,11 @@ const isGreaterThanForHHMM = (str1: string, str2: string) => {
   return Number(str1.replace(":", "")) > Number(str2.replace(":", ""));
 };
 
-type ParsedOpeningHoursType = {
-  [key in DAYS_ENUM]: Array<{
-    openingHours: string;
-    closingHours: string;
-  }>;
-};
+type ParsedOpeningHoursType = Array<{
+  day: DAYS_ENUM;
+  openingHours: string;
+  closingHours: string;
+}>;
 
 const addOpeningHoursToDay = (
   parsedOpeningHours: ParsedOpeningHoursType,
@@ -59,11 +58,8 @@ const addOpeningHoursToDay = (
   openingHours: string,
   closingHours: string,
 ) => {
-  if (parsedOpeningHours[day][0].openingHours === RESTAURANT_CLOSED) {
-    parsedOpeningHours[day].pop();
-  }
-
-  parsedOpeningHours[day].push({
+  parsedOpeningHours.push({
+    day,
     openingHours,
     closingHours,
   });
@@ -79,17 +75,7 @@ export const transformOpeningHours = (openingHours: string) => {
   // initialize with the restaurant closed on all days and then populate
   // the times.
 
-  let parsedOpeningHours: ParsedOpeningHoursType = Object.fromEntries(
-    DAYS_ENUM_VALUES.map((element: DAYS_ENUM) => [
-      element,
-      [
-        {
-          openingHours: RESTAURANT_CLOSED,
-          closingHours: RESTAURANT_CLOSED,
-        },
-      ],
-    ]),
-  ) as ParsedOpeningHoursType;
+  let parsedOpeningHours: ParsedOpeningHoursType | [] = [];
 
   const splitOpeningHours = openingHours.split("/");
   splitOpeningHours.forEach((element) => {
