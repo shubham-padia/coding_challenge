@@ -1,11 +1,14 @@
 {
   "name": "glints_coding_challenge",
+  "type": "commonjs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "node ./node_modules/typescript/bin/tsc --project tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prettier:diff": "pnpx prettier --write $(git diff --name-only --diff-filter d | grep '.ts$' | xargs)"
+    "prettier:diff": "pnpx prettier --write $(git diff ${1:-main} --name-only)",
+    "load-restaurants-into-db": "pnpm run build && node dist/loadRestaurantsIntoDatabase.js"
   },
   "keywords": [],
   "author": "",

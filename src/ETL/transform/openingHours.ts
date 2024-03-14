@@ -1,12 +1,11 @@
 import { DAYS_ENUM } from "../constants";
 import { ERRORS } from "./errors";
 
-const RESTAURANT_CLOSED = "RESTAURANT_CLOSED";
 const VALID_DAY_NAMES = {
   [DAYS_ENUM.MONDAY]: ["MON"],
   [DAYS_ENUM.TUESDAY]: ["TUE", "TUES"],
   [DAYS_ENUM.WEDNESDAY]: ["WED", "WEDS"],
-  [DAYS_ENUM.THURSDAY]: ["THUR", "THURS"],
+  [DAYS_ENUM.THURSDAY]: ["THU", "THUR", "THURS"],
   [DAYS_ENUM.FRIDAY]: ["FRI"],
   [DAYS_ENUM.SATURDAY]: ["SAT"],
   [DAYS_ENUM.SUNDAY]: ["SUN"],
