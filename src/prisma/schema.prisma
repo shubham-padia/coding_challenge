@@ -25,6 +25,8 @@ model Dishes {
   price        Decimal     @db.Decimal(6,2)
   Restaurant   Restaurants @relation(fields: [RestaurantId], references: [id])
   RestaurantId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum DAYS {
@@ -45,4 +47,6 @@ model OpeningHours {
   closingHours String
   Restaurant   Restaurants @relation(fields: [RestaurantId], references: [id])
   RestaurantId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
