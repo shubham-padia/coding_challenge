@@ -11,11 +11,11 @@ datasource db {
 }
 
 model Restaurants {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String
-  dishes    Dishes[]
+  id           String           @id @default(uuid())
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  name         String
+  dishes       Dishes[]
   openingHours OpeningHours[]
 }
 
@@ -25,8 +25,8 @@ model Dishes {
   price        Decimal     @db.Decimal(6,2)
   Restaurant   Restaurants @relation(fields: [RestaurantId], references: [id])
   RestaurantId String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
 
 enum DAYS {
@@ -41,12 +41,12 @@ enum DAYS {
 
 
 model OpeningHours {
-  id           String      @id @default(uuid())
-  day          DAYS
-  openingHours String
-  closingHours String
-  Restaurant   Restaurants @relation(fields: [RestaurantId], references: [id])
-  RestaurantId String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                  String      @id @default(uuid())
+  day                 DAYS
+  openingHours        Int
+  closingHours        Int
+  Restaurant          Restaurants @relation(fields: [RestaurantId], references: [id])
+  RestaurantId        String
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
 }

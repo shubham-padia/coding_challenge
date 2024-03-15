@@ -15,15 +15,20 @@ const DAYS_ENUM_VALUES = Object.values(DAYS_ENUM);
 const convertTime12to24 = (time12h: string) => {
   const [time, modifier] = time12h.split(" ");
 
-  let [hours, minutes] = time.split(":");
+  let [hoursString, minutesString] = time.split(":");
 
-  if (!minutes) minutes = "00";
-  if (hours === "12") hours = "00";
+  let hours = 0;
+  let minutes = 0;
+
+  if (!minutesString) minutes = 0
+  else minutes = Number(minutesString);
+
+  hours = Number(hoursString);
+  if (hoursString === "12") hours = 0;
   if (modifier.toUpperCase() === "PM")
-    hours = (parseInt(hours, 10) + 12).toString();
-  if (hours.length === 1) hours = `0${hours}`;
+    hours = hours + 12;
 
-  return `${hours}:${minutes}`;
+  return hours * 100 + minutes;
 };
 
 const getDay = (str: string) => {
@@ -47,15 +52,15 @@ const isGreaterThanForHHMM = (str1: string, str2: string) => {
 
 type ParsedOpeningHoursType = Array<{
   day: DAYS_ENUM;
-  openingHours: string;
-  closingHours: string;
+  openingHours: number;
+  closingHours: number;
 }>;
 
 const addOpeningHoursToDay = (
   parsedOpeningHours: ParsedOpeningHoursType,
   day: DAYS_ENUM,
-  openingHours: string,
-  closingHours: string,
+  openingHours: number,
+  closingHours: number,
 ) => {
   parsedOpeningHours.push({
     day,
@@ -113,7 +118,7 @@ export const transformOpeningHours = (openingHours: string) => {
         }
       }
 
-      if (!isGreaterThanForHHMM(openingHours, closingHours)) {
+      if (openingHours <= closingHours) {
         days.forEach((day) => {
           parsedOpeningHours = addOpeningHoursToDay(
             parsedOpeningHours,
@@ -128,12 +133,12 @@ export const transformOpeningHours = (openingHours: string) => {
             parsedOpeningHours,
             day,
             openingHours,
-            "23:59",
+            2359,
           );
           parsedOpeningHours = addOpeningHoursToDay(
             parsedOpeningHours,
             getNextDay(day),
-            "00:00",
+            0,
             closingHours,
           );
         });
