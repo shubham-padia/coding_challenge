@@ -14,7 +14,10 @@ type Restaurant = {
 
 const loadRestaurantsIntoDatabase = () => {
   const prisma = new PrismaClient();
-  let rawData = fs.readFileSync('src/ETL/assets/restaurants_with_menu.json', "utf8");
+  let rawData = fs.readFileSync(
+    "src/ETL/assets/restaurants_with_menu.json",
+    "utf8",
+  );
   let restaurants = JSON.parse(rawData);
   let data: Array<Prisma.RestaurantsCreateInput> = [];
   // NOTE: This is not the most optimal approach to create restaurants one by one.

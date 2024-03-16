@@ -20,13 +20,12 @@ const convertTime12to24 = (time12h: string) => {
   let hours = 0;
   let minutes = 0;
 
-  if (!minutesString) minutes = 0
+  if (!minutesString) minutes = 0;
   else minutes = Number(minutesString);
 
   hours = Number(hoursString);
   if (hoursString === "12") hours = 0;
-  if (modifier.toUpperCase() === "PM")
-    hours = hours + 12;
+  if (modifier.toUpperCase() === "PM") hours = hours + 12;
 
   return hours * 100 + minutes;
 };
