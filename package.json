@@ -8,7 +8,8 @@
     "build": "node ./node_modules/typescript/bin/tsc --project tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prettier:diff": "pnpx prettier --write $(git diff ${1:-main} --name-only)",
-    "load-restaurants-into-db": "pnpm run build && node dist/loadRestaurantsIntoDatabase.js"
+    "load-restaurants-into-db": "pnpm run build && node dist/ETL/loadRestaurantsIntoDatabase.js",
+    "start": "pnpm run build && node dist/server.js"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,9 @@
     "schema": "src/prisma/schema.prisma"
   },
   "dependencies": {
-    "@prisma/client": "5.11.0"
+    "@fastify/type-provider-typebox": "^4.0.0",
+    "@prisma/client": "5.11.0",
+    "@sinclair/typebox": "^0.32.15",
+    "fastify": "^4.26.2"
   }
 }

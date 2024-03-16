@@ -1,0 +1,13 @@
+export enum DAYS_ENUM {
+  SUNDAY = "SUNDAY",
+  MONDAY = "MONDAY",
+  TUESDAY = "TUESDAY",
+  WEDNESDAY = "WEDNESDAY",
+  THURSDAY = "THURSDAY",
+  FRIDAY = "FRIDAY",
+  SATURDAY = "SATURDAY",
+}
+
+export enum VALID_INCLUDES {
+  DISHES = "dishes",
+}
